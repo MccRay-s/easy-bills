@@ -1,10 +1,8 @@
 import { format } from 'date-fns'
-// import type { ComputedRef } from 'vue'
 import { registerTheme, use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { BarChart, PieChart } from 'echarts/charts'
 import {
-  DataZoomComponent,
   GridComponent,
   LegendComponent,
   TitleComponent,
@@ -33,7 +31,6 @@ export const useEchart = () => {
     LegendComponent,
     ToolboxComponent,
     GridComponent,
-    DataZoomComponent,
   ])
   // 分类统计
   const categaryOptions = ref({

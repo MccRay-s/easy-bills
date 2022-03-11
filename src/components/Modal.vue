@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 const emits = defineEmits(['close', 'open', 'confirm', 'update:modelValue'])
 const props = defineProps({
   modelValue: {

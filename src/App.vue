@@ -78,7 +78,7 @@ onMounted(() => {
     >
       <header
         bg="white dark:gray-800"
-        class="w-full bg-white my-6 shadow-xs  items-center h-16 rounded-2xl"
+        class="w-full bg-white my-6 shadow-xs items-center h-16 rounded-2xl"
       >
         <div class="container flex items-center justify-between h-full px-6 mx-auto ">
           <!-- Search input -->
@@ -92,7 +92,8 @@ onMounted(() => {
               <input
                 v-model="searchText"
                 type="text"
-                class="block w-full leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-700 text-gray-400 aa-input"
+                class="block w-full leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 text-gray-400"
+                bg="gray-100 dark:gray-700 "
                 p="y-1.5 l-8 r-4"
                 placeholder="输入账单分类查询"
                 @keydown.enter="handleSearch"
@@ -338,7 +339,6 @@ onMounted(() => {
           :option="expensesOptions"
         />
       </div>
-
       <div
         v-show="!showAdd"
         ref="addButton"
@@ -420,7 +420,8 @@ onMounted(() => {
           <div>
             <label
               for="category"
-              class="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-gray-300"
+              text="sm left gray-900 dark:gray-300"
+              class="block mb-2 font-medium"
             >账单分类</label>
             <select
               id="category"
@@ -440,23 +441,28 @@ onMounted(() => {
           <div>
             <label
               for="amount"
-              class="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-gray-300"
+              text="sm left gray-900 dark:gray-300"
+              class="block mb-2 font-medium"
             >账单金额</label>
             <input
               id="amount"
               v-model.number="billInfo.amount"
               type="text"
               name="amount"
+              text="gray-900 sm dark:white"
               placeholder="请输入金额"
               bg="gray-50 dark:gray-600"
-              class="border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              class="border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-500 "
             >
           </div>
           <button
             type="button"
             :disabled="!canSaveBill"
             :class="{'cursor-not-allowed' : !canSaveBill }"
-            class="disabled:opacity-50 w-full text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            text="white center sm"
+            p="x-5 y-2.5"
+            bg="blue-700 hover:blue-800 dark:blue-600 dark:hover:blue-700"
+            class="disabled:opacity-50 w-full mt-4 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  dark:focus:ring-blue-800"
             @click="handleSaveBill"
           >
             确定
@@ -464,6 +470,5 @@ onMounted(() => {
         </form>
       </Modal1>
     </div>
-    <Footer />
   </main>
 </template>
