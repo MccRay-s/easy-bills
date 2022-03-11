@@ -24,12 +24,22 @@ export const guid = (): string => {
 //   return format(date, fmt)
 // }
 
-export const loadFile = (path: string): string => {
-  const xhr = new XMLHttpRequest()
-  xhr.open('GET', path, false)
-  xhr.overrideMimeType('text/comma-separated-values;charset=utf-8')
-  xhr.send(null)
-  return xhr.responseText
+export const loadFile = async(path: string): Promise<string> => {
+  return new Promise<string>((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', path, true)
+    xhr.overrideMimeType('text/comma-separated-values;charset=utf-8')
+    xhr.onload = () => {
+      if (xhr.readyState === 4 && xhr.status === 200)
+        resolve(xhr.responseText)
+      else
+        reject(xhr.statusText)
+    }
+    xhr.onerror = () => {
+      reject(Error('Network Error'))
+    }
+    xhr.send(null)
+  })
 }
 
 export const getCountDays = (date: Date): number => {

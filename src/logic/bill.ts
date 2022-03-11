@@ -216,9 +216,8 @@ export const useBill = (addTargetRef: Ref<HTMLElement| undefined>) => {
   /**
    * 加载数据
    */
-  const autoLoadCsv = () => {
-    const categoryContent = loadFile(`${window.origin}/data/categories.csv`)
-    const billContent = loadFile(`${window.origin}/data/bill.csv`)
+  const autoLoadCsv = async() => {
+    const [categoryContent, billContent] = await Promise.all([loadFile(`${window.origin}/data/categories.csv`), loadFile(`${window.origin}/data/bill.csv`)])
     _parseData(categoryContent, billContent)
   }
 
