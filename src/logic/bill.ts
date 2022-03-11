@@ -9,6 +9,8 @@ export const useBill = (addTargetRef: Ref<HTMLElement| undefined>) => {
   const showImport = ref(false)
   const showAdd = ref(false)
   const currMounth = ref<Date>(new Date())
+  const searchText = ref<string>('')
+  const searchKey = ref<string>('')
   const billInfo = reactive<BillInfo>({
     id: '',
     type: -1,
@@ -18,8 +20,12 @@ export const useBill = (addTargetRef: Ref<HTMLElement| undefined>) => {
   })
   const billList = computed((): Array<BillInfo> => {
     return allBill.value
-      // 过滤当月
-      .filter(o => isSameMonth(o.time, currMounth.value))
+      // 过滤当月&分类
+      .filter(o => isSameMonth(o.time, currMounth.value)
+        && (searchKey.value
+          ? o.categoryName?.includes(searchKey.value)
+          : true),
+      )
       // 排序: 日期 > 金额
       .sort((a, b) => {
         const aTime = a.time.getTime()
@@ -185,6 +191,7 @@ export const useBill = (addTargetRef: Ref<HTMLElement| undefined>) => {
         },
       )
     })
+    const list: Array<BillInfo> = []
     billRows.forEach((item) => {
       const row = item.split(',')
       const [type, time, category, amount] = row
@@ -197,8 +204,13 @@ export const useBill = (addTargetRef: Ref<HTMLElement| undefined>) => {
         categoryName,
         amount: toFixed(Math.abs(Number(amount)), 2),
       }
-      allBill.value.push(info)
+      list.push(info)
     })
+    allBill.value = list
+  }
+
+  const handleSearch = () => {
+    searchKey.value = searchText.value
   }
 
   /**
@@ -225,9 +237,12 @@ export const useBill = (addTargetRef: Ref<HTMLElement| undefined>) => {
     totalPay,
     categoryChartData,
     expensesStatistics,
+    searchText,
+    searchKey,
     openAdding,
     handleCsvFile,
     handleSaveBill,
     autoLoadCsv,
+    handleSearch,
   }
 }

@@ -22,10 +22,12 @@ const {
   totalPay,
   categoryChartData,
   expensesStatistics,
+  searchText,
   openAdding,
   handleSaveBill,
   handleCsvFile,
   autoLoadCsv,
+  handleSearch,
 } = useBill(addButton)
 const {
   VChart,
@@ -88,10 +90,12 @@ onMounted(() => {
                 </svg>
               </div>
               <input
+                v-model="searchText"
                 type="text"
                 class="block w-full leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-700 text-gray-400 aa-input"
                 p="y-1.5 l-8 r-4"
                 placeholder="输入账单分类查询"
+                @keydown.enter="handleSearch"
               >
             </div>
           </div>
